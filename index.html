@@ -1,671 +1,875 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Vuelta del Norte 2026 - Livre de Route</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        tdf: {
-                            yellow: '#FFD200',
-                            black: '#111111',
-                            gray: '#F5F5F5',
-                            darkgray: '#222222'
-                        },
-                        stage: {
-                            plaine: '#10B981',
-                            vallon: '#F59E0B',
-                            montagne: '#EF4444'
-                        }
-                    },
-                    fontFamily: {
-                        title: ['Anton', 'sans-serif'],
-                        body: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F5F5F5; color: #111111; }
-        h1, h2, h3, h4, .font-title { font-family: 'Anton', sans-serif; letter-spacing: 0.05em; }
-        .clip-slant { clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>La Vuelta del Norte 2026 — Roadbook Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --yellow:#FFD200;
+      --black:#111111;
+      --white:#FFFFFF;
+      --gray:#F5F5F5;
+      --line:#E7E7E7;
+      --green:#18A957;
+      --orange:#F59E0B;
+      --red:#E53935;
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:var(--white);
+      color:var(--black);
+      font-family:"Inter",system-ui,-apple-system,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom:96px;
+    }
+
+    .wrap{
+      width:min(100%, 720px);
+      margin:0 auto;
+      background:linear-gradient(180deg,#fff 0%, #fafafa 100%);
+      min-height:100vh;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:var(--black);
+      color:#fff;
+      padding:22px 18px 28px;
+    }
+
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at top right, rgba(255,210,0,.16), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,.04), transparent 40%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:var(--yellow);
+      color:var(--black);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      position:relative;
+      z-index:1;
+    }
+
+    h1,h2,h3{
+      margin:0;
+      line-height:.95;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:50px;
+      letter-spacing:.02em;
+      margin-top:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .subtitle{
+      margin-top:12px;
+      font-size:14px;
+      line-height:1.45;
+      color:rgba(255,255,255,.84);
+      max-width:40ch;
+      position:relative;
+      z-index:1;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+      border-radius:18px;
+      padding:14px;
+    }
+
+    .stat b{
+      display:block;
+      font-size:24px;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .stat span{
+      font-size:12px;
+      color:rgba(255,255,255,.76);
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .section{
+      padding:18px;
+    }
+
+    .intro-card, .stage, .director-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .intro-card{
+      margin-top:-14px;
+      position:relative;
+      z-index:3;
+    }
+
+    .intro-inner{
+      padding:18px;
+    }
+
+    .title-row{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+
+    .title{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:32px;
+      letter-spacing:.02em;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border-radius:999px;
+      padding:8px 10px;
+      background:var(--gray);
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+      text-transform:uppercase;
+    }
+
+    .lead{
+      font-size:15px;
+      line-height:1.6;
+      color:#232323;
+    }
+
+    .acts{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .act{
+      background:var(--gray);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .act strong{
+      display:block;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:4px;
+    }
+
+    .stage{
+      margin-bottom:16px;
+    }
+
+    .stage-head{
+      padding:16px 16px 14px;
+      color:#fff;
+    }
+
+    .terrain-plaine{background:linear-gradient(135deg,var(--green),#0f7e42)}
+    .terrain-vallon{background:linear-gradient(135deg,var(--orange),#db7d00)}
+    .terrain-montagne{background:linear-gradient(135deg,var(--red),#b71c1c)}
+
+    .stage-kicker{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .stage-num{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:42px;
+      line-height:1;
+      letter-spacing:.03em;
+    }
+
+    .stage-name{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:28px;
+      line-height:1;
+      margin-top:6px;
+    }
+
+    .date{
+      font-size:12px;
+      font-weight:700;
+      opacity:.9;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-top:8px;
+    }
+
+    .difficulty{
+      text-align:right;
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .stars{
+      display:block;
+      font-size:20px;
+      letter-spacing:2px;
+      margin-top:6px;
+    }
+
+    .stage-body{
+      padding:16px;
+    }
+
+    .stage-image{
+      position:relative;
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+      margin-bottom:14px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.12);
+      border:1px solid #ececec;
+      background:#f3f3f3;
+    }
+
+    .stage-image img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .stage-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.20), transparent 45%);
+      pointer-events:none;
+    }
+
+    .route{
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .metric{
+      background:var(--gray);
+      border-radius:16px;
+      padding:12px 10px;
+    }
+
+    .metric b{
+      display:block;
+      font-size:20px;
+      margin-bottom:4px;
+    }
+
+    .metric span{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#555;
+      font-weight:700;
+    }
+
+    .profile{
+      background:linear-gradient(180deg,#fafafa 0%, #f0f0f0 100%);
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:14px;
+      border:1px solid #ececec;
+    }
+
+    .profile h4{
+      margin:0 0 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+
+    svg{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .legend{
+      display:flex;
+      justify-content:space-between;
+      margin-top:8px;
+      font-size:11px;
+      color:#666;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .content-block{
+      margin-bottom:14px;
+    }
+
+    .content-block h5{
+      margin:0 0 8px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:#666;
+    }
+
+    .content-block p, .content-block li{
+      font-size:14px;
+      line-height:1.55;
+      margin:0;
+    }
+
+    .content-block ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .director-card{
+      background:var(--black);
+      color:#fff;
+      border:none;
+    }
+
+    .director-card .inner{
+      padding:18px;
+    }
+
+    .director-title{
+      font-family:"Anton", Impact, sans-serif;
+      font-size:34px;
+      margin-bottom:10px;
+    }
+
+    .director-grid{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .director-item{
+      background:rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .director-item strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--yellow);
+    }
+
+    .bottom-nav{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:max(12px, env(safe-area-inset-bottom));
+      width:min(calc(100% - 20px), 700px);
+      background:rgba(17,17,17,.92);
+      color:#fff;
+      backdrop-filter:blur(14px);
+      border-radius:20px;
+      padding:10px;
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      z-index:50;
+    }
+
+    .bottom-nav a{
+      color:#fff;
+      text-decoration:none;
+      background:rgba(255,255,255,.08);
+      padding:10px 12px;
+      border-radius:14px;
+      white-space:nowrap;
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .bottom-nav a:first-child{
+      background:var(--yellow);
+      color:var(--black);
+    }
+
+    .source{
+      padding:0 18px 18px;
+      color:#666;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    @media (min-width:700px){
+      .grid{grid-template-columns:repeat(4,1fr)}
+      .stats{grid-template-columns:repeat(4,1fr)}
+    }
+  </style>
 </head>
-<body class="antialiased pb-20">
-
-    <!-- COUVERTURE & INTRO -->
-    <header class="bg-tdf-black text-white relative overflow-hidden border-b-[12px] border-tdf-yellow">
-        <div class="max-w-6xl mx-auto px-6 py-20 relative z-10">
-            <p class="text-tdf-yellow font-bold tracking-widest uppercase text-sm mb-4 border-l-4 border-tdf-yellow pl-3">Livre de Route Officiel</p>
-            <h1 class="font-title text-6xl md:text-8xl text-white uppercase leading-none mb-6">La Vuelta <br><span class="text-tdf-yellow">del Norte 2026</span></h1>
-
-            <div class="grid md:grid-cols-2 gap-12 mt-12 text-gray-300">
-                <div>
-                    <h2 class="font-title text-2xl text-white mb-3 flex items-center gap-2">📍 Présentation globale</h2>
-                    <p class="leading-relaxed text-sm md:text-base">
-                        De l'énergie industrielle de l'estuaire de Bilbao aux vignobles dorés de la Rioja Alavesa, cette "Vuelta del Norte" est un condensé de l'Espagne septentrionale. Le tracé quitte rapidement l'océan Cantabrique pour affronter la barrière redoutable de la Cordillère Cantabrique. Il bascule ensuite sur les hauts plateaux de Castille-et-León, un territoire rugueux en perpétuelle tôle ondulée. Le parcours se faufile à travers les failles calcaires vertigineuses de l'Ebre pour finalement plonger vers les terres viticoles d'Alava.
-                    </p>
-                </div>
-                <div>
-                    <h2 class="font-title text-2xl text-white mb-3 flex items-center gap-2">🎯 L'Esprit de l'Épreuve</h2>
-                    <p class="leading-relaxed text-sm md:text-base">
-                        Ce tracé est un chef-d'œuvre de vice topographique. Il ne s'agit pas d'un marathon pour purs rouleurs, ni d'un enchaînement exclusif de très haute altitude. C'est un parcours taillé pour les "gaziers" et les puncheurs-grimpeurs. L'usure sera la clé de voûte : les successions de vallons casse-pattes de la province de Burgos feront autant de dégâts dans les organismes que les grands pourcentages de la Cantabrie.
-                    </p>
-                </div>
-            </div>
-
-            <!-- CHIFFRES CLÉS -->
-            <div class="mt-16 bg-tdf-darkgray p-6 rounded-lg shadow-xl grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div>
-                    <p class="text-tdf-yellow text-xs font-bold uppercase mb-1">Dates</p>
-                    <p class="font-title text-2xl">8 - 14 AVRIL 2026</p>
-                </div>
-                <div>
-                    <p class="text-tdf-yellow text-xs font-bold uppercase mb-1">Distance Totale</p>
-                    <p class="font-title text-2xl">379 <span class="text-lg">KM</span></p>
-                </div>
-                <div>
-                    <p class="text-tdf-yellow text-xs font-bold uppercase mb-1">Dénivelé Positif</p>
-                    <p class="font-title text-2xl">3 634 <span class="text-lg">M</span></p>
-                </div>
-                <div>
-                    <p class="text-tdf-yellow text-xs font-bold uppercase mb-1">Vitesse Moyenne</p>
-                    <p class="font-title text-2xl">~22,3 <span class="text-lg">KM/H</span></p>
-                </div>
-            </div>
-        </div>
+<body>
+  <div class="wrap">
+    <header class="hero" id="top">
+      <span class="eyebrow">Roadbook officiel • Mobile Edition</span>
+      <h1>La Vuelta<br>del Norte 2026</h1>
+      <p class="subtitle">
+        Sept étapes, un relief haché, une usure permanente. Un parcours pensé comme une montée en pression de l’estuaire de Bilbao jusqu’aux remparts de Laguardia.
+      </p>
+      <div class="stats">
+        <div class="stat"><b>379 km</b><span>Distance totale</span></div>
+        <div class="stat"><b>3 634 m</b><span>Dénivelé positif</span></div>
+        <div class="stat"><b>~17 h</b><span>Temps de selle</span></div>
+        <div class="stat"><b>22,29 km/h</b><span>Moyenne cible</span></div>
+      </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-12 space-y-12">
-
-        <!-- ÉTAPE 1 -->
-        <article class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <div class="bg-tdf-black text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-stage-plaine gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-yellow">ÉTAPE 1</span> — Le Prologue de l'Estuaire</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-stage-plaine text-white px-4 py-1 clip-slant">
-                    PLAINE
-                </div>
+    <section class="section">
+      <article class="intro-card">
+        <div class="intro-inner">
+          <div class="title-row">
+            <div class="title">L’esprit de l’épreuve</div>
+            <div class="pill">Puncheurs • Grimpeurs</div>
+          </div>
+          <p class="lead">
+            Ce parcours n’est ni un simple marathon de rouleurs, ni une succession de très haute montagne. C’est un tracé d’usure, taillé pour les coureurs capables d’encaisser les relances, les vallons casse-pattes et les ascensions longues sans exploser.
+          </p>
+          <div class="acts">
+            <div class="act">
+              <strong>Acte 1</strong>
+              Round d’observation sur la côte pour lancer la machine. Étapes 1 & 2.
             </div>
-
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-gray p-6 rounded-lg space-y-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Parcours</span>
-                        <span class="font-title text-xl">CESTAS &gt; BILBAO</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl text-tdf-black">26 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-tdf-black">70 M</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">🚴 Vit. Moy</span>
-                        <span class="font-title text-xl text-tdf-black">19.2 KM/H</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase">Difficulté</span>
-                        <span class="text-stage-plaine font-bold">⭐☆☆☆☆ (1/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">🚴 PRÉSENTATION</h4>
-                        <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                            Après un transfert logistique matinal, les coureurs posent les roues sur les rives de la Ría de Bilbao. Le parcours est fluide et rapide. Les grandes avenues industrielles offrent un bitume parfait pour lancer la machine et prendre la mesure du climat basque avant les réelles hostilités.
-                        </p>
-                    </div>
-
-                    <div class="bg-tdf-black text-white p-5 rounded-lg border-l-4 border-tdf-yellow">
-                        <h4 class="font-title tracking-wider text-tdf-yellow mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic">« Une mise en bouche nécessaire. Le peloton va défiler au pied du Guggenheim de Bilbao. Pas de chronomètre aujourd'hui, mais profitez de l'air marin, car la montagne nous observe déjà. »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🎯 Stratégie</h5>
-                            <p class="text-xs text-gray-600">Endurance fondamentale. Haute cadence (90-100 rpm) pour évacuer les toxines.</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded border border-red-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-red-600">⚠️ Vigilance</h5>
-                            <p class="text-xs text-red-800">Densité du trafic urbain et rails de tramway à Bilbao.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="act">
+              <strong>Acte 2</strong>
+              Explosion totale du peloton dans l’étape reine vers Espinosa. Étape 3.
             </div>
-
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="image.png-77bf8533-8840-4260-a828-e7dd92ec2c91" alt="Carte Étape 1" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/1200x500/eeeeee/999999?text=CARTE+ETAPE+1';">
-                    </div>
-                </div>
+            <div class="act">
+              <strong>Acte 3</strong>
+              Guerre d’usure sur les toboggans castillans avant l’ultime explication sur les pentes de Laguardia. Étapes 4 à 7.
             </div>
-        </article>
+          </div>
+        </div>
+      </article>
+    </section>
 
-        <!-- ÉTAPE 2 -->
-        <article class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <div class="bg-tdf-black text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-stage-vallon gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-yellow">ÉTAPE 2</span> — L'Appel des Collines</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-stage-vallon text-white px-4 py-1 clip-slant">
-                    ACCIDENTÉE
-                </div>
+    <section class="section">
+      <article class="stage" id="e1">
+        <div class="stage-head terrain-plaine">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 1</div>
+              <div class="stage-name">Le Prologue de l’Estuaire</div>
+              <div class="date">Mercredi 8 avril 2026</div>
             </div>
+            <div class="difficulty">Difficulté<span class="stars">★☆☆☆☆</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="route">Cestas &gt; Bordeaux / Bilbao → Santurtzi</div>
+          <div class="grid">
+            <div class="metric"><b>26 km</b><span>Distance</span></div>
+            <div class="metric"><b>70 m</b><span>D+</span></div>
+            <div class="metric"><b>19,2</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Plaine</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • Le fil de rasoir</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 1">
+              <polyline points="0,63 40,62 75,60 105,58 145,59 180,56 220,54 260,50 320,46" fill="none" stroke="#18A957" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Départ urbain</span><span>Faux-plat côtier</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>Une mise en jambes fluide et rapide sur les rives de la Ría de Bilbao. Effort d’endurance fondamentale, sans impact stratégique majeur.</p>
+          </div>
+          <div class="content-block">
+            <h5>Vigilance</h5>
+            <ul>
+              <li>Densité du trafic urbain</li>
+              <li>Rails de tramway à Bilbao</li>
+            </ul>
+          </div>
+        </div>
+      </article>
 
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-gray p-6 rounded-lg space-y-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Départ</span>
-                        <span class="font-title text-xl">SANTURTZI</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">🏁 Arrivée</span>
-                        <span class="font-title text-xl text-right">RAMALES DE LA VIC.</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl">65 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-stage-vallon">745 M</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase">Difficulté</span>
-                        <span class="text-stage-vallon font-bold">⭐⭐⭐☆☆ (3/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">⛰️ PROFIL : LES MARCHES D'ESCALIER</h4>
-                        <div class="flex flex-col gap-2 text-sm text-gray-700">
-                            <p><strong>Km 0 à 30 :</strong> Vallée et faux-plats (1-2%). Idéal pour l'échappée.</p>
-                            <p><strong>Km 30 à 45 :</strong> Entrée dans les collines. Bosses à 3-4%, l'usure commence.</p>
-                            <p><strong>Km 45 à 65 :</strong> L'explication finale. Montées sèches (5-6%) vers Ramales (350m alt).</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-tdf-black text-white p-5 rounded-lg border-l-4 border-tdf-yellow">
-                        <h4 class="font-title tracking-wider text-tdf-yellow mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic">« La tension monte d'un cran. Les 45 premiers km endormiront les méfiances, mais le triptyque final vers Ramales à 6% de moyenne va faire brûler les cuisses. »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🎯 Stratégie</h5>
-                            <p class="text-xs text-gray-600">Punch/Seuil lactique. Rester caché les 30 premiers km pour le raidard final.</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded border border-red-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-red-600">⚠️ Vigilance</h5>
-                            <p class="text-xs text-red-800">Routes potentiellement humides dans les sous-bois cantabriques.</p>
-                        </div>
-                    </div>
-                </div>
+      <article class="stage" id="e2">
+        <div class="stage-head terrain-vallon">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 2</div>
+              <div class="stage-name">L’Appel des Collines</div>
+              <div class="date">Jeudi 9 avril 2026</div>
             </div>
+            <div class="difficulty">Difficulté<span class="stars">★★★☆☆</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-image">
+            <img src="https://raw.githubusercontent.com/mlpb-tools/Vuelta-del-norte/main/33D4EF9B-DEE0-4123-A156-1556C25E23A2.png" alt="Étape 2 - L’Appel des Collines">
+          </div>
+          <div class="route">Santurtzi → Ramales de la Victoria</div>
+          <div class="grid">
+            <div class="metric"><b>65 km</b><span>Distance</span></div>
+            <div class="metric"><b>745 m</b><span>D+</span></div>
+            <div class="metric"><b>17,18</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Accidentée</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • Les marches d’escalier</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 2">
+              <polyline points="0,68 40,66 80,63 120,59 150,54 180,48 210,43 240,38 280,30 320,20" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Faux-plats</span><span>Final 5–6%</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>On quitte la mer pour un réseau secondaire rugueux. Les 45 premiers kilomètres usent, le final en bosse fait parler le punch et le seuil lactique.</p>
+          </div>
+          <div class="content-block">
+            <h5>Moment clé</h5>
+            <p>Le kilomètre 45, lorsque la pente s’affermit au-delà des 5%.</p>
+          </div>
+          <div class="content-block">
+            <h5>Vigilance</h5>
+            <ul>
+              <li>Routes potentiellement humides dans les sous-bois</li>
+              <li>Ne pas se découvrir trop tôt</li>
+            </ul>
+          </div>
+        </div>
+      </article>
 
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="F9BA74FF-FA53-476E-8331-76FD5210F1DA.png" alt="Carte Étape 2" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500">
-                    </div>
-                </div>
+      <article class="stage" id="e3">
+        <div class="stage-head terrain-montagne">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 3</div>
+              <div class="stage-name">L’Étape Reine</div>
+              <div class="date">Vendredi 10 avril 2026</div>
             </div>
-        </article>
+            <div class="difficulty">Difficulté<span class="stars">★★★★★</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-image">
+            <img src="https://raw.githubusercontent.com/mlpb-tools/Vuelta-del-norte/main/25DAF685-5E48-4273-ABD9-C0C7FE083651.png" alt="Étape 3 - L’Étape Reine">
+          </div>
+          <div class="route">Ramales → Espinosa de los Monteros (via La Gándara)</div>
+          <div class="grid">
+            <div class="metric"><b>42 km</b><span>Distance</span></div>
+            <div class="metric"><b>1 224 m</b><span>D+</span></div>
+            <div class="metric"><b>12,48</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Haute montagne</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • L’ascension vers le ciel</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 3">
+              <polyline points="0,72 40,68 80,60 120,50 160,36 200,22 240,12 280,16 320,42" fill="none" stroke="#E53935" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Approche vallée</span><span>Sommet 1200 m</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>Courte, brutale, impitoyable. Une ascension géante dans la Cordillère Cantabrique avant la bascule sur les plateaux austères de Burgos.</p>
+          </div>
+          <div class="content-block">
+            <h5>Moment clé</h5>
+            <p>Le km 10, au pied de La Gándara. C’est ici que le maillot jaune se joue.</p>
+          </div>
+          <div class="content-block">
+            <h5>Consigne directeur sportif</h5>
+            <p>Lissage absolu de l’effort. Interdiction de passer dans le rouge avant le km 25.</p>
+          </div>
+        </div>
+      </article>
 
-        <!-- ÉTAPE 3 -->
-        <article class="bg-white shadow-2xl rounded-xl overflow-hidden border border-stage-montagne ring-4 ring-stage-montagne ring-opacity-20 transform md:scale-[1.02] transition-transform">
-            <div class="bg-stage-montagne text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-tdf-black gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-black">ÉTAPE 3</span> — L'Étape Reine (Juge de Paix)</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-tdf-black text-white px-4 py-1 clip-slant shadow-md">
-                    HAUTE MONTAGNE
-                </div>
+      <article class="stage" id="e4">
+        <div class="stage-head terrain-vallon">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 4</div>
+              <div class="stage-name">Les Montagnes Russes Castillanes</div>
+              <div class="date">Samedi 11 avril 2026</div>
             </div>
+            <div class="difficulty">Difficulté<span class="stars">★★★☆☆</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-image">
+            <img src="https://raw.githubusercontent.com/mlpb-tools/Vuelta-del-norte/main/438D96B8-D072-4540-B594-A9BEB0F68982.png" alt="Étape 4 - Les Montagnes Russes Castillanes">
+          </div>
+          <div class="route">Espinosa de los Monteros → Polientes (via Puentedey)</div>
+          <div class="grid">
+            <div class="metric"><b>56 km</b><span>Distance</span></div>
+            <div class="metric"><b>700 m</b><span>D+</span></div>
+            <div class="metric"><b>16,47</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Casse-pattes</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • La scie sauteuse</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 4">
+              <polyline points="0,28 35,50 70,26 105,58 140,30 175,62 210,36 245,56 280,32 320,18" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Relances</span><span>Final +300 m</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>Le chaos topographique commence. Montées sèches, descentes techniques et aucune portion de repos réelle.</p>
+          </div>
+          <div class="content-block">
+            <h5>Moment clé</h5>
+            <p>La cuvette de la rivière Nela au km 30. La relance qui suit peut être létale.</p>
+          </div>
+          <div class="content-block">
+            <h5>Vigilance</h5>
+            <ul>
+              <li>Goudron incertain dans les descentes</li>
+              <li>Coups de vent sur les crêtes</li>
+            </ul>
+          </div>
+        </div>
+      </article>
 
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-black text-white p-6 rounded-lg space-y-4 shadow-inner">
-                    <div class="flex justify-between items-center border-b border-gray-700 pb-2">
-                        <span class="font-bold text-sm text-gray-400 uppercase flex items-center gap-2">📍 Départ</span>
-                        <span class="font-title text-xl text-tdf-yellow">RAMALES</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-700 pb-2">
-                        <span class="font-bold text-sm text-gray-400 uppercase flex items-center gap-2">🏁 Arrivée</span>
-                        <span class="font-title text-xl text-tdf-yellow">ESPINOSA</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-700 pb-2">
-                        <span class="font-bold text-sm text-gray-400 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl">42 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-700 pb-2">
-                        <span class="font-bold text-sm text-gray-400 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-red-500">1 224 M</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-400 uppercase">Difficulté</span>
-                        <span class="text-red-500 font-bold">⭐⭐⭐⭐⭐ (5/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">⛰️ PROFIL : L'ASCENSION VERS LE CIEL</h4>
-                        <div class="flex flex-col gap-2 text-sm text-gray-700">
-                            <p><strong>Km 0 à 10 :</strong> Approche en vallée. Le calme avant la tempête.</p>
-                            <p class="text-stage-montagne font-bold"><strong>Km 10 à 35 (La Gándara) :</strong> Un effort colossal de 25 km, dont 15 km ininterrompus à 4-7% de moyenne.</p>
-                            <p><strong>Km 35 à 42 :</strong> Plateau sommital à 1200m puis plongée vers Espinosa.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-100 p-5 rounded-lg border-l-4 border-tdf-black">
-                        <h4 class="font-title tracking-wider text-tdf-black mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic font-medium">« Une étape au format sprint conçue pour l'offensive. La Gándara n'offre aucun abri. Les coureurs vont se retrouver seuls face à la montagne. Celui qui basculera en tête à 1200m posera une main sur le trophée final. »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-tdf-yellow bg-opacity-20 p-4 rounded border border-tdf-yellow">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-tdf-black">🎯 Gestion</h5>
-                            <p class="text-xs text-gray-800">Lissage absolu. Interdiction de passer dans le rouge avant le km 25. Tout à gauche d'entrée.</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded border border-red-200">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-red-600">⚠️ Météo extrême</h5>
-                            <p class="text-xs text-red-800">Choc thermique au sommet (1200m). Préparer impérativement le coupe-vent pour le plateau.</p>
-                        </div>
-                    </div>
-                </div>
+      <article class="stage" id="e5">
+        <div class="stage-head terrain-vallon">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 5</div>
+              <div class="stage-name">Le Gouffre des Canyons</div>
+              <div class="date">Dimanche 12 avril 2026</div>
             </div>
+            <div class="difficulty">Difficulté<span class="stars">★★★★☆</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-image">
+            <img src="https://raw.githubusercontent.com/mlpb-tools/Vuelta-del-norte/main/1F480123-4F29-48F7-9A54-866037AD8B7A.png" alt="Étape 5 - Le Gouffre des Canyons">
+          </div>
+          <div class="route">Polientes → Medina de Pomar (via Pesquera de Ebro)</div>
+          <div class="grid">
+            <div class="metric"><b>73 km</b><span>Distance</span></div>
+            <div class="metric"><b>773 m</b><span>D+</span></div>
+            <div class="metric"><b>16,59</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Endurance</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • Le plongeon et le mur</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 5">
+              <polyline points="0,18 40,22 80,30 120,70 160,56 200,38 240,20 280,30 320,40" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Canyon</span><span>Sortie infernale</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>L’étape la plus longue. Une chute libre vers les gorges de l’Èbre suivie d’une remontée interminable jusqu’au plateau.</p>
+          </div>
+          <div class="content-block">
+            <h5>Moment clé</h5>
+            <p>Le km 30, à la sortie de Pesquera de Ebro, lorsque commence la remontée majeure.</p>
+          </div>
+          <div class="content-block">
+            <h5>Vigilance</h5>
+            <ul>
+              <li>Chaleur réverbérée au fond du canyon</li>
+              <li>Accumulation de fatigue sur les 20 derniers kilomètres</li>
+            </ul>
+          </div>
+        </div>
+      </article>
 
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="08141216-DA3B-4C0B-A59B-6EF45AFA6E51.png" alt="Carte Étape 3" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500">
-                    </div>
-                </div>
+      <article class="stage" id="e6">
+        <div class="stage-head terrain-vallon">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 6</div>
+              <div class="stage-name">L’Échappée dans la Sierra</div>
+              <div class="date">Lundi 13 avril 2026</div>
             </div>
-        </article>
+            <div class="difficulty">Difficulté<span class="stars">★★☆☆☆</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-image">
+            <img src="https://raw.githubusercontent.com/mlpb-tools/Vuelta-del-norte/main/9AD89103-46F1-4DF2-B048-B2545A037BB2.png" alt="Étape 6 - L’Échappée dans la Sierra">
+          </div>
+          <div class="route">Medina de Pomar → Ayuelas (via San Pedro de Tejada)</div>
+          <div class="grid">
+            <div class="metric"><b>64 km</b><span>Distance</span></div>
+            <div class="metric"><b>634 m</b><span>D+</span></div>
+            <div class="metric"><b>16,84</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Vallonnée</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • La traversée du plateau</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 6">
+              <polyline points="0,24 45,42 90,60 135,34 180,52 225,42 270,28 320,18" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Plateau bosselé</span><span>20 km finaux en prise</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>Une étape propice aux échappées de loin, mais dont la longue remontée finale peut figer les jambes.</p>
+          </div>
+          <div class="content-block">
+            <h5>Moment clé</h5>
+            <p>Le km 45, lorsque la pente s’inverse définitivement jusqu’à la ligne.</p>
+          </div>
+          <div class="content-block">
+            <h5>Vigilance</h5>
+            <ul>
+              <li>Vent de face sur la dernière ascension</li>
+              <li>Relâchement psychologique de l’avant-veille d’arrivée</li>
+            </ul>
+          </div>
+        </div>
+      </article>
 
-        <!-- ÉTAPE 4 -->
-        <article class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <div class="bg-tdf-black text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-stage-vallon gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-yellow">ÉTAPE 4</span> — Montagnes Russes Castillanes</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-stage-vallon text-white px-4 py-1 clip-slant">
-                    CASSE-PATTES
-                </div>
+      <article class="stage" id="e7">
+        <div class="stage-head terrain-plaine">
+          <div class="stage-kicker">
+            <div>
+              <div class="stage-num">ÉTAPE 7</div>
+              <div class="stage-name">Le Final sur le Mur de Vignes</div>
+              <div class="date">Mardi 14 avril 2026</div>
             </div>
+            <div class="difficulty">Difficulté<span class="stars">★★☆☆☆</span></div>
+          </div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-image">
+            <img src="https://raw.githubusercontent.com/mlpb-tools/Vuelta-del-norte/main/5A11F2A5-2BC7-4A4D-908A-50851F80F5CD.png" alt="Étape 7 - Le Final sur le Mur de Vignes">
+          </div>
+          <div class="route">Ayuelas → Laguardia</div>
+          <div class="grid">
+            <div class="metric"><b>53 km</b><span>Distance</span></div>
+            <div class="metric"><b>303 m</b><span>D+</span></div>
+            <div class="metric"><b>19,16</b><span>Km/h cible</span></div>
+            <div class="metric"><b>Puncheurs</b><span>Type</span></div>
+          </div>
+          <div class="profile">
+            <h4>Profil • La ligne droite et le crochet</h4>
+            <svg viewBox="0 0 320 90" aria-label="Profil étape 7">
+              <polyline points="0,18 60,32 120,44 180,44 240,44 280,28 320,12" fill="none" stroke="#18A957" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span>Transition roulante</span><span>Mur final 8 km</span></div>
+          </div>
+          <div class="content-block">
+            <h5>Lecture d’étape</h5>
+            <p>La plus rapide du roadbook. Tout se joue dans le final en bosse vers la cité fortifiée de Laguardia.</p>
+          </div>
+          <div class="content-block">
+            <h5>Moment clé</h5>
+            <p>Le panneau des 8 derniers kilomètres. Placement impératif avant le pied du mur.</p>
+          </div>
+          <div class="content-block">
+            <h5>Vigilance</h5>
+            <ul>
+              <li>Rester caché à haute vitesse jusqu’au final</li>
+              <li>Ne pas exploser au pied de la bosse</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
 
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-gray p-6 rounded-lg space-y-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Départ</span>
-                        <span class="font-title text-xl">ESPINOSA</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">🏁 Arrivée</span>
-                        <span class="font-title text-xl">POLIENTES</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl">56 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-stage-vallon">700 M</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase">Difficulté</span>
-                        <span class="text-stage-vallon font-bold">⭐⭐⭐☆☆ (3/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">⛰️ PROFIL : LA SCIE SAUTEUSE</h4>
-                        <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                            L'enfer de la "tôle ondulée". Le grand chaos central (km 15 à 45) comprend le passage spectaculaire sur l'arche de Puentedey (820m), un plongeon vers la rivière Nela, et des pentes oscillant continuellement à 5-6%. Se termine par une remontée étouffante vers Polientes.
-                        </p>
-                    </div>
-
-                    <div class="bg-tdf-black text-white p-5 rounded-lg border-l-4 border-tdf-yellow">
-                        <h4 class="font-title tracking-wider text-tdf-yellow mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic">« C'est le jour des audacieux. Le profil donne le vertige rien qu'à le regarder. Le passage sous l'arche de Puentedey sera magnifique pour les caméras, terrible pour les mollets. »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🎯 Stratégie</h5>
-                            <p class="text-xs text-gray-600">Relances perpétuelles. Le moment clé est la relance de la cuvette de la rivière Nela (km 30).</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded border border-red-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-red-600">⚠️ Vigilance</h5>
-                            <p class="text-xs text-red-800">Descentes techniques sur goudron incertain, coups de vent sur les crêtes.</p>
-                        </div>
-                    </div>
-                </div>
+    <section class="section">
+      <article class="director-card">
+        <div class="inner">
+          <div class="eyebrow">Synthèse</div>
+          <div class="director-title">Directeur sportif</div>
+          <div class="director-grid">
+            <div class="director-item">
+              <strong>ADN du parcours</strong>
+              Un relief haché, une usure permanente, aucune étape vraiment neutre après le prologue.
             </div>
-
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="5A0DA581-CE16-41AC-A3DC-144C2816A04F.png" alt="Carte Étape 4" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500">
-                    </div>
-                </div>
+            <div class="director-item">
+              <strong>Juge de paix</strong>
+              La Gándara, étape 3. Le classement général s’y joue, mais ne s’y verrouille pas totalement.
             </div>
-        </article>
-
-        <!-- ÉTAPE 5 -->
-        <article class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <div class="bg-tdf-black text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-stage-vallon gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-yellow">ÉTAPE 5</span> — Le Gouffre des Canyons</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-stage-vallon text-white px-4 py-1 clip-slant">
-                    ENDURANCE
-                </div>
+            <div class="director-item">
+              <strong>Danger caché</strong>
+              Les étapes 4 et 5 : moins prestigieuses, mais destructrices physiquement.
             </div>
-
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-gray p-6 rounded-lg space-y-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Départ</span>
-                        <span class="font-title text-xl">POLIENTES</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">🏁 Arrivée</span>
-                        <span class="font-title text-xl">MEDINA DE POMAR</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl">73 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-stage-vallon">773 M</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase">Difficulté</span>
-                        <span class="text-stage-vallon font-bold">⭐⭐⭐⭐☆ (4/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">⛰️ PROFIL : LE PLONGEON ET LE MUR</h4>
-                        <div class="flex flex-col gap-2 text-sm text-gray-700">
-                            <p><strong>Km 15 à 30 :</strong> La chute libre. Descente vertigineuse au fond des gorges de l'Ebre (516m).</p>
-                            <p class="text-stage-vallon font-bold"><strong>Km 30 à 73 :</strong> La remontée infernale. Ascension interminable pour s'arracher des gorges jusqu'à 865m, puis final heurté.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-tdf-black text-white p-5 rounded-lg border-l-4 border-tdf-yellow">
-                        <h4 class="font-title tracking-wider text-tdf-yellow mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic">« Une étape pour les forçats de la route au cœur du grand canyon. Le peloton descend en enfer à 500m d'altitude pour mieux remonter au purgatoire à 865m. Une journée d'usure absolue. »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🎯 Stratégie</h5>
-                            <p class="text-xs text-gray-600">Résistance longue durée. S'économiser au maximum sur le plateau initial balayé par les vents.</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded border border-red-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-red-600">⚠️ Chaleur</h5>
-                            <p class="text-xs text-red-800">Chaleur réverbérée au fond du canyon de calcaire. Fatigue intense prévue dans le final.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="director-item">
+              <strong>Profil du vainqueur</strong>
+              Puncheur-grimpeur endurant, capable de gérer les relances et les finals explosifs.
             </div>
+          </div>
+        </div>
+      </article>
+    </section>
 
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="44DE9218-392A-4810-906F-E22D1C4F7C87.jpeg" alt="Carte Étape 5" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
-        </article>
+    <p class="source">
+      Images chargées depuis le repo GitHub mlpb-tools/Vuelta-del-norte.
+    </p>
+  </div>
 
-        <!-- ÉTAPE 6 -->
-        <article class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <div class="bg-tdf-black text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-stage-vallon gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-yellow">ÉTAPE 6</span> — L'Échappée dans la Sierra</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-stage-vallon text-white px-4 py-1 clip-slant">
-                    VALLONNÉE
-                </div>
-            </div>
-
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-gray p-6 rounded-lg space-y-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Parcours</span>
-                        <span class="font-title text-xl">MEDINA &gt; AYUELAS</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl">64 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-tdf-black">634 M</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase">Difficulté</span>
-                        <span class="text-stage-vallon font-bold">⭐⭐½☆☆ (2.5/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">⛰️ PROFIL : LA TRAVERSÉE DU PLATEAU</h4>
-                        <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                            Contournement de la Sierra de la Tesla. Un profil global en cuvette, idéal pour les échappées. Descente nerveuse, passage bosselé autour de l'ermitage roman de San Pedro de Tejada, puis remontée finale constante et usante (20 derniers km en prise vers Ayuelas).
-                        </p>
-                    </div>
-
-                    <div class="bg-tdf-black text-white p-5 rounded-lg border-l-4 border-tdf-yellow">
-                        <h4 class="font-title tracking-wider text-tdf-yellow mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic">« Sous les yeux de l'ermitage millénaire, la course ne laissera aucun répit. La longue remontée finale de 20 km vers Ayuelas va peser comme du plomb dans des jambes déjà martyrisées. »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🎯 Stratégie</h5>
-                            <p class="text-xs text-gray-600">Puissance au train. Moment clé au km 45 où la pente s'inverse. Travailler les relais face au vent.</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded border border-red-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2 text-red-600">⚠️ Vigilance</h5>
-                            <p class="text-xs text-red-800">Le relâchement psychologique à la veille de l'arrivée.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="77413B90-3323-4D0A-92CE-429E74E4B238.jpeg" alt="Carte Étape 6" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- ÉTAPE 7 -->
-        <article class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <div class="bg-tdf-black text-white flex flex-col md:flex-row justify-between md:items-center p-5 md:pl-8 border-l-8 border-stage-plaine gap-4">
-                <h3 class="font-title text-3xl md:text-4xl tracking-wide uppercase"><span class="text-tdf-yellow">ÉTAPE 7</span> — Le Final sur le Mur de Vignes</h3>
-                <div class="flex items-center gap-3 font-title text-xl bg-stage-plaine text-white px-4 py-1 clip-slant">
-                    PLAINE / MUR
-                </div>
-            </div>
-
-            <div class="p-6 md:p-8 grid md:grid-cols-3 gap-8">
-                <div class="bg-tdf-gray p-6 rounded-lg space-y-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Départ</span>
-                        <span class="font-title text-xl">AYUELAS</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">🏁 Arrivée</span>
-                        <span class="font-title text-xl">LAGUARDIA</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">📍 Distance</span>
-                        <span class="font-title text-xl">53 KM</span>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase flex items-center gap-2">⛰️ Dénivelé</span>
-                        <span class="font-title text-xl text-tdf-black">303 M</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="font-bold text-sm text-gray-500 uppercase">Difficulté</span>
-                        <span class="text-stage-plaine font-bold">⭐⭐☆☆☆ (2/5)</span>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 class="font-title text-xl mb-2 text-tdf-black flex items-center gap-2">⛰️ PROFIL : LA LIGNE DROITE ET LE CROCHET</h4>
-                        <div class="flex flex-col gap-2 text-sm text-gray-700">
-                            <p><strong>Km 0 à 45 :</strong> Plongeon très roulant vers le bassin de l'Ebre puis transition plate dans les vignes.</p>
-                            <p class="text-tdf-yellow bg-tdf-black p-2 rounded inline-block w-fit font-bold mt-1"><strong>Le Mur (Km 45 à 53) :</strong> Les 8 derniers km s'élèvent à 4-6% pour un final épique.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-tdf-black text-white p-5 rounded-lg border-l-4 border-tdf-yellow">
-                        <h4 class="font-title tracking-wider text-tdf-yellow mb-2 text-lg">LE MOT DU DIRECTEUR</h4>
-                        <p class="text-sm italic">« Oubliez le sprint massif traditionnel ! Cette Vuelta s'achève par un bras de fer en côte. Le long défilé à très haute vitesse se fracassera contre les pourcentages finaux. Le vainqueur sera sacré sous les remparts ! »</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🎯 Stratégie</h5>
-                            <p class="text-xs text-gray-600">Placement parfait requis aux 8 km. Ne pas se mettre dans le rouge au pied de la bosse.</p>
-                        </div>
-                        <div class="bg-tdf-yellow bg-opacity-10 p-4 rounded border border-tdf-yellow text-tdf-black">
-                            <h5 class="font-bold text-sm flex items-center gap-2 mb-2">🚴 Vitesse</h5>
-                            <p class="text-xs font-semibold">Étape la plus rapide (19,16 km/h). Rester caché à 45km/h dans la descente.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="px-6 md:px-8 pb-6 md:pb-8">
-                <div class="border-t border-gray-200 pt-6">
-                    <h4 class="font-title text-xl mb-4 text-tdf-black flex items-center gap-2">🗺️ CARTE DU PARCOURS</h4>
-                    <div class="bg-tdf-gray rounded-xl overflow-hidden border border-gray-200 relative group aspect-video md:aspect-[21/9]">
-                        <img src="FA94A6EF-04E3-4DE1-8D6E-1B1ABC9CD74B.jpeg" alt="Carte Étape 7" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- SYNTHÈSE -->
-        <section class="mt-16 bg-white p-8 rounded-xl shadow-lg border-t-[12px] border-tdf-black overflow-x-auto">
-            <h2 class="font-title text-3xl mb-6 text-tdf-black uppercase tracking-wide">📊 Fiche Terrain (Synthèse)</h2>
-            <table class="w-full text-left border-collapse min-w-[800px]">
-                <thead>
-                    <tr class="bg-tdf-gray text-tdf-black border-b-2 border-tdf-black text-sm uppercase font-title tracking-wider">
-                        <th class="p-3">Date</th>
-                        <th class="p-3">Étape</th>
-                        <th class="p-3">Type</th>
-                        <th class="p-3">Dist.</th>
-                        <th class="p-3">D+</th>
-                        <th class="p-3">Alt. Max</th>
-                        <th class="p-3">Clé Profil</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm">
-                    <tr class="border-b border-gray-200 hover:bg-gray-50">
-                        <td class="p-3 font-semibold">Mer 08/04</td>
-                        <td class="p-3 font-bold">1. Cestas &gt; Bilbao</td>
-                        <td class="p-3 text-stage-plaine font-bold uppercase">Plaine</td>
-                        <td class="p-3">26 km</td>
-                        <td class="p-3">70 m</td>
-                        <td class="p-3">35 m</td>
-                        <td class="p-3 text-gray-600">Décrassage urbain</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 hover:bg-gray-50">
-                        <td class="p-3 font-semibold">Jeu 09/04</td>
-                        <td class="p-3 font-bold">2. Santurtzi &gt; Ramales</td>
-                        <td class="p-3 text-stage-vallon font-bold uppercase">Accidentée</td>
-                        <td class="p-3">65 km</td>
-                        <td class="p-3">745 m</td>
-                        <td class="p-3">350 m</td>
-                        <td class="p-3 text-gray-600">Montées à 5-6% sur la fin</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 bg-red-50 hover:bg-red-100">
-                        <td class="p-3 font-semibold text-red-800">Ven 10/04</td>
-                        <td class="p-3 font-bold text-red-900">3. Ramales &gt; Espinosa</td>
-                        <td class="p-3 text-stage-montagne font-bold uppercase">Haute Montagne</td>
-                        <td class="p-3 font-bold">42 km</td>
-                        <td class="p-3 font-bold">1224 m</td>
-                        <td class="p-3 font-bold">1200 m</td>
-                        <td class="p-3 text-red-800 font-semibold">15km à 4-7% (La Gándara)</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 hover:bg-gray-50">
-                        <td class="p-3 font-semibold">Sam 11/04</td>
-                        <td class="p-3 font-bold">4. Espinosa &gt; Polientes</td>
-                        <td class="p-3 text-stage-vallon font-bold uppercase">Casse-pattes</td>
-                        <td class="p-3">56 km</td>
-                        <td class="p-3">700 m</td>
-                        <td class="p-3">835 m</td>
-                        <td class="p-3 text-gray-600">V inversés constants</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 hover:bg-gray-50">
-                        <td class="p-3 font-semibold">Dim 12/04</td>
-                        <td class="p-3 font-bold">5. Polientes &gt; Medina</td>
-                        <td class="p-3 text-stage-vallon font-bold uppercase">Résistance</td>
-                        <td class="p-3">73 km</td>
-                        <td class="p-3">773 m</td>
-                        <td class="p-3">865 m</td>
-                        <td class="p-3 text-gray-600">Canyon profond (815m-&gt;516m)</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 hover:bg-gray-50">
-                        <td class="p-3 font-semibold">Lun 13/04</td>
-                        <td class="p-3 font-bold">6. Medina &gt; Ayuelas</td>
-                        <td class="p-3 text-stage-vallon font-bold uppercase">Transition</td>
-                        <td class="p-3">64 km</td>
-                        <td class="p-3">634 m</td>
-                        <td class="p-3">719 m</td>
-                        <td class="p-3 text-gray-600">Remontée de 20 km à la fin</td>
-                    </tr>
-                    <tr class="border-b-4 border-tdf-yellow hover:bg-gray-50">
-                        <td class="p-3 font-semibold">Mar 14/04</td>
-                        <td class="p-3 font-bold">7. Ayuelas &gt; Laguardia</td>
-                        <td class="p-3 text-stage-plaine font-bold uppercase">Puncheurs</td>
-                        <td class="p-3">53 km</td>
-                        <td class="p-3">303 m</td>
-                        <td class="p-3">719 m</td>
-                        <td class="p-3 text-gray-600">Descente rapide puis mur de 8 km</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr class="bg-tdf-black text-tdf-yellow font-title text-xl tracking-wider">
-                        <td colspan="3" class="p-4 text-right">TOTAL VUELTA DEL NORTE</td>
-                        <td class="p-4">379 KM</td>
-                        <td class="p-4">3634 M</td>
-                        <td colspan="2" class="p-4"></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-
-    </main>
-
-    <footer class="mt-16 bg-tdf-black py-8 text-center text-gray-500 text-sm border-t-4 border-tdf-yellow">
-        <p class="font-title tracking-widest text-white mb-2">VUELTA DEL NORTE 2026</p>
-        <p>Conception Graphique : Livre de Route Officiel</p>
-    </footer>
-
+  <nav class="bottom-nav" aria-label="Navigation des étapes">
+    <a href="#top">Intro</a>
+    <a href="#e1">E1</a>
+    <a href="#e2">E2</a>
+    <a href="#e3">E3</a>
+    <a href="#e4">E4</a>
+    <a href="#e5">E5</a>
+    <a href="#e6">E6</a>
+    <a href="#e7">E7</a>
+  </nav>
 </body>
 </html>
